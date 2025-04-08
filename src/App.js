@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TokyoMetroGuide from "./TokyoMetroGuide";
+import MapComponent from './MapComponent'; // Importar el nuevo componente
 import {
   LineChart,
   Line,
@@ -48,6 +49,8 @@ const cities = [
   {
     id: 1,
     name: "Tokio",
+    lat: 35.6895,
+    lng: 139.6917,
     description:
       "Capital de Japón que combina modernidad y tradición. Desde rascacielos futuristas hasta templos antiguos, Tokio ofrece una experiencia única.",
     image:
@@ -197,6 +200,8 @@ const cities = [
   {
     id: 3,
     name: "Kawaguchiko",
+    lat: 35.4986,
+    lng: 138.7670,
     description:
       "Pintoresco pueblo junto a un lago con impresionantes vistas del Monte Fuji. Ofrece aguas termales, naturaleza y actividades al aire libre.",
     image:
@@ -255,6 +260,8 @@ const cities = [
   {
     id: 4,
     name: "Kioto",
+    lat: 35.0116,
+    lng: 135.7681,
     description:
       "Antigua capital imperial con más de 1,600 templos budistas y 400 santuarios sintoístas. Una ciudad que conserva la esencia tradicional japonesa.",
     image:
@@ -355,6 +362,8 @@ const cities = [
   {
     id: 5,
     name: "Osaka",
+    lat: 34.6937,
+    lng: 135.5023,
     description:
       "Ciudad conocida por su deliciosa gastronomía, ambiente desenfadado y vida nocturna vibrante. Los locales son abiertos y directos.",
     image:
@@ -441,6 +450,8 @@ const cities = [
   {
     id: 6,
     name: "Kobe",
+    lat: 34.6901,
+    lng: 135.1955,
     description:
       "Ciudad portuaria conocida por su famosa carne de res Kobe, arquitectura internacional y hermosas vistas nocturnas desde el Monte Rokko.",
     image:
@@ -499,6 +510,8 @@ const cities = [
   {
     id: 7,
     name: "Hiroshima",
+    lat: 34.3853,
+    lng: 132.4553,
     description:
       "Ciudad con un pasado conmovedor que se ha transformado en un símbolo de paz. Moderna, verde y acogedora.",
     image:
@@ -582,6 +595,8 @@ const cities = [
   {
     id: 8,
     name: "Hakone",
+    lat: 35.2338,
+    lng: 139.0235,
     description:
       "Destino de aguas termales (onsen) cerca de Tokio, con vistas al Monte Fuji y naturaleza excepcional.",
     image:
@@ -647,6 +662,8 @@ const cities = [
   {
     id: 9,
     name: "Nikko",
+    lat: 36.7541,
+    lng: 139.5951,
     description:
       "Ciudad santuario en las montañas con templos Patrimonio de la Humanidad y naturaleza imponente.",
     image:
@@ -703,6 +720,8 @@ const cities = [
   {
     id: 10,
     name: "Narita",
+    lat: 35.7843,
+    lng: 140.3141,
     description:
       "Ciudad tradicional cerca del aeropuerto internacional con templos históricos, calles antiguas y deliciosos pescados de río.",
     image:
@@ -751,6 +770,8 @@ const cities = [
   {
     id: 11,
     name: "Tokio (regreso)",
+    lat: 35.6895,
+    lng: 139.6917,
     description:
       "Regreso a Tokio para últimas compras, experiencias pendientes y preparación para el viaje de vuelta.",
     image:
@@ -1776,6 +1797,16 @@ Japan Rail Pass: ${jrPassType}
               }`}
             >
               Metro de Tokio
+            </button>
+            <button
+              onClick={() => setActiveTab(6)} // Nueva pestaña
+              className={`px-4 py-2 text-sm md:text-base font-medium whitespace-nowrap ${ 
+                activeTab === 6
+                  ? "border-b-2 border-red-600 text-red-600"
+                  : "text-gray-500 hover:text-red-600 hover:border-red-600"
+              }`}
+            >
+              Mapa Interactivo
             </button>
           </div>
         </div>
@@ -2975,6 +3006,12 @@ Japan Rail Pass: ${jrPassType}
         {activeTab === 5 && (
           // Contenido de Metro de Tokio
           <TokyoMetroGuide />
+        )}
+        {activeTab === 6 && ( // Nuevo panel para el mapa
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-2xl font-bold mb-4 text-red-700">Mapa del Viaje</h2>
+            <MapComponent cities={cities} />
+          </div>
         )}
       </div>
     </div>
